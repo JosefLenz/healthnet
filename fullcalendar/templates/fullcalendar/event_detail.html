@@ -1,0 +1,107 @@
+{% extends 'main/base_nav.html' %}
+{% load staticfiles %}
+{% load main_extras %}
+
+{% block page-title %} Appointment Details - {{object.title}} {% endblock %}
+
+{% block head %}
+		<link rel="stylesheet" href="{% static 'css/profile.css' %}" >
+{% endblock %}
+
+{% block main %}
+		<div id="page-wrapper">
+			<div id="header-wrapper">
+				<div class="container_temp">
+					<div class="row_temp">
+						<div class="12u">
+							<header id="header">
+								<h1><a href="#" id="logo">HealthNet</a></h1>
+							</header>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="row" style="margin:20px;"></div>
+				{% if form.errors %}
+			        <!-- Error messaging -->
+			            <div id="errors">
+			                <div class="inner" >
+			                    <p>There were some errors in the information you entered. Please correct the following:</p>
+			                    {{ form.non_field_errors }}
+			                    <ul>
+			                        {% for field in form %}
+			                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+			                        {% endfor %}
+			                    </ul>
+			                </div>
+			            </div>
+				<!-- /Error messaging -->
+			 {% endif %}
+
+			    <form method = 'post'>
+			        {% csrf_token %}
+			        <div class="container">
+							<div class="row">
+								<h2>
+									Appointment Details - {{object.title}}
+								</h2>
+								<h3>
+									Hospital: {{ object.hospital }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									Doctor: {{ object.doctor.get_name }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									Start Date: {{ object.start.date }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									Start Time: {{ object.start.time }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									End Date{{ object.end.date }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									End Time{{ object.end.time }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									Patient: {{ object.patient.get_name }}
+								</h3>
+							</div>
+							<div class="row">
+								<h3>
+									{% if object.verified %} Verified by Doctor. {% endif %}
+								</h3>
+							</div>
+			        </div>
+
+			        <a href="{% url 'fullcalendar:index' %}" class="button_temp pull-left" />Back</a>
+			        {% if not object.verified %}{% if view.canverify %}<a href="{% url 'fullcalendar:verifyAppointment' pk=view.kwargs.pk %}" class="button_temp pull-right" />Verify</a>{% endif %}{% endif %}
+			        <a href="{% url 'fullcalendar:editAppointment' pk=view.kwargs.pk %}" class="button_temp pull-right" />Edit</a>
+			        <a href="{% url 'fullcalendar:deleteAppointment' view.kwargs.pk %}" class="button_temp_red pull-right" />Delete</a>
+
+			    </form>
+
+				<div class="row" style="margin:20px;"></div>
+			</div>
+			<div class="row">
+				<div class="12u">
+					<div id="copyright">
+						&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+					</div>
+				</div>
+			</div>
+{% endblock main %}

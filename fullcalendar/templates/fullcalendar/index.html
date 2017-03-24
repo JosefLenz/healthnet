@@ -1,0 +1,13 @@
+{% extends "fullcalendar/base.html" %}
+
+{% load fullcalendar_tags %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{{ block.super }}
+	{% calendar %}
+
+{% endblock content %}
+

@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<link rel="shortcut icon" href="{% static 'main/images/bkz_io.png' %}"/>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <title>HealthNet</title>
+
+	    <!-- Bootstrap -->
+	    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	    <link rel="stylesheet" href="register_2.css" >
+	</head>
+
+	<form action="{% url 'main:profile'%}" method="post">
+        {% csrf_token %}
+	<body>
+		<h1>Register</h1>
+		<div class="container">
+
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+				<h3 class="well">Pre-Existing Conditions</h3>
+			</div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+				<h3 class="well">Emergency Contact</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5 well">
+				<textarea class="preExist" rows="10" placeholder="List all pre-existing conditions here. Each condition on a new line."></textarea>
+			</div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5 well">
+				<div class="input-group">
+  					<span class="input-group-addon" id="basic-addon1">Name</span>
+  					<input type="text" class="form-control" id="name" placeholder="" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group">
+  					<span class="input-group-addon" id="basic-addon1">Email</span>
+  					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group">
+  					<span class="input-group-addon" id="basic-addon1">Phone</span>
+  					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group address">
+  					<span class="input-group-addon" id="basic-addon1">Address</span>
+  					<textarea rows="2" class="form-control" placeholder="" aria-describedby="basic-addon1"></textarea>
+				</div>
+
+		</div>
+		</div>
+
+    <div class="btn btn-default pull-right"><input type="submit" value="Finish" /></div>
+	<div class="btn btn-default pull-right">Back</div>
+
+	</body>
+		</form>
+
+</html>

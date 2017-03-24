@@ -1,0 +1,22 @@
+ .info{
+    width: 300px;
+    height: 600px;
+    margin: 0 auto;
+    margin-left: 55px;
+    background-color: #fff; 
+    display: inline-flex;
+    border: solid #000 3px;
+    border-radius: 5px;
+    padding: 5px;
+ }
+
+ img{
+    margin:0px;
+    padding:0px;
+    border: solid #000 3px;
+    border-radius: 5px;
+    width: 100%;
+ }
+
+
+

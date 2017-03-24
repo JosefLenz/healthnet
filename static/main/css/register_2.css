@@ -1,0 +1,25 @@
+body{
+	background-image: linear-gradient(180deg,#1464f6,#fff);
+    background-size: cover;
+    background-repeat:no-repeat;
+    height:100%;
+}
+h1{
+	background-color: #fff;
+	padding: 15px;
+	padding-right: 25px;
+	display: inline-block;
+	font-family: "Helvetica";
+	font-weight: 200;
+	border-radius: 5px;
+	border: solid #000 3px;
+}
+
+.preExist{
+	width:100%;
+	height:300px;
+}
+
+.btn{
+	margin-right: 5px;
+}

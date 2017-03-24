@@ -1,0 +1,93 @@
+{% extends 'main/base_nav.html' %}
+{% load staticfiles %}
+{% load main_extras %}
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% block page-title %} Home {% endblock %}
+		{% block head %}
+			<link rel="stylesheet" href="{% static 'css/home.css' %}" >
+		{% endblock %}
+	</head>
+	<body>
+		{% block main %}
+		<div id="page-wrapper">
+			{% include 'main/navbar.html' %}
+			<div id="banner-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="well">
+								<h2 class="text-center">
+									Welcome to HealthNet
+								</h2>
+								<p class="text-center">
+									The solution to all of your healthcare needs!
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="well">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 720px;height:320px; margin:auto; border:#000 solid 1px; border-radius: 3px">
+		                <!-- Indicators -->
+		                <ol class="carousel-indicators hidden-xs">
+		                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		                    <li data-target="#myCarousel" data-slide-to="1"></li>
+		                    <li data-target="#myCarousel" data-slide-to="2"></li>
+		                </ol>
+
+		                <!-- Wrapper for slides -->
+		                <div class="carousel-inner" role="listbox">
+		                    <div class="item active">
+		                        <img src="{% static 'main/images/carousel_doctor_photo_1.jpeg' %}" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+		                    </div>
+		                    <div class="item">
+		                        <img src="{% static 'main/images/carousel_doctor_photo_2.jpeg' %}" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+		                    </div>
+		                    <div class="item">
+		                        <img src="{% static 'main/images/carousel_doctor_3.jpg' %}" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+		                    </div>
+		                </div>
+
+		                <!-- Left and right controls -->
+		                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		                    <span class="sr-only">Previous</span>
+		                </a>
+		                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		                    <span class="sr-only">Next</span>
+		                </a>
+		            </div>
+		            </div>
+				</div>
+			</div>
+
+			
+			<div id="main">
+				<div class="container">
+					<div class="row main-row">
+						<div class="4u 12u(mobile)">
+						</div>
+					</div>
+					<div class="row">
+						<div class="12u">
+
+							<div id="copyright">
+								&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+	</body>
+</html>

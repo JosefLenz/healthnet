@@ -1,0 +1,137 @@
+{% extends 'main/base_nav.html' %}
+{% load staticfiles %}
+{% load main_extras %}
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+		{% block page-title %} Profile {% endblock %}
+		{% block head %}
+			<link rel="stylesheet" href="{% static 'css/profile.css' %}" >
+		{% endblock %}
+	<body>
+		<div id="page-wrapper">
+			{% block main %}
+			{% include 'main/navbar.html' %}
+			<div id="main">
+				<div class="container">
+				    <div class="row">
+					    <div class="col-sm-2">
+					    	<img class="img_prof" src="{{ MEDIA_URL }}{{ request.user.patient.avatar.url }}" alt="generic"  style="margin-bottom:10px;border: solid #000 3px; border-radius: 5px; width: 100%; margin-top: auto"/>
+					    </div>
+					    <div class="col-sm-6">
+			                <!-- Displays patient name -->
+						    <h3 class="well">
+						    	{{request.user.first_name}} {{request.user.last_name}}
+						    </h3>
+					    </div>
+					    <div class="col-sm-4">
+					    	<!-- takin space -->
+					    </div>
+					    
+				    </div>
+			        <div class="row">
+			            <!-- Headers for info wells -->
+			            <div class="col-sm-5">
+			                <h3 class="well">Medical History</h3>
+			            </div>
+			            <div class="col-sm-2"></div>
+			            <div class="col-sm-5">
+			                <h3 class="well">Personal Information</h3>
+			            </div>
+			        </div>
+				    <div class="row">
+			            <!-- Displays Patient medical information -->
+					    <div class="col-sm-5 well well-tall">
+					    	<p>
+								<h3>Medical Conditions:</h3>
+									<pre>{{request.user.patient.medical_conditions}}</pre>
+								<br>
+								<br>
+								<br>
+								<h3>Prescriptions:</h3>
+										{% for prescription in prescriptions %}
+										 <p>
+											 <pre> {{ prescription }} </pre>
+											<br><br>
+										 </p>
+										{% endfor %}
+								<h3>Tests:</h3>
+								{% for test in tests %}
+									<p>
+										<pre>Name: {{ test.testName }}
+											{% if test.testReleased %}
+												 {% if test.testImage.url != None %}<br><img class="img_prof" src="{{ MEDIA_URL }}{{ test.testImage.url }}" alt="generic"  style="margin-bottom:10px;border: solid #000 3px; border-radius: 5px; width: 100%; margin-top: auto"/> {% endif %}
+												 <br>Comment: {{ test.testComment }}
+												 <br>Doctor: {{ test.testDoctor }}
+											{% endif %}
+										</pre>
+									</p>
+								{% endfor %}
+					    	</p>
+					    </div>
+					    <div class="col-sm-2"></div>
+
+			            <!-- Displays Patient information -->
+					    <div class="col-sm-5 well well-tall">
+					    	<p>
+			                    Username: {{request.user.username}}<br>
+			                    First Name: {{request.user.first_name}}<br>
+			                    Last Name: {{request.user.last_name}}<br>
+			                    Email: {{request.user.email}}<br>
+			                    Address: <br>
+                                {{address_line1}}<br>
+			                    {{address_line2}}<br>
+			                    {{address_city}}<br>
+			                    {{address_region}}<br>
+			                    {{address_zip}}<br>
+			                    {{address_country}}<br>
+			                    Preferred Hospital: {{request.user.patient.preferred_hospital}}<br>
+			                    Emergency Contact: {{request.user.patient.emergency_contact}}<br>
+			                    Emergency Contact Number: {{request.user.patient.emergency_contact_number}}<br>
+						    </p>
+					    </div>
+				    </div>
+
+
+			        <!--edit profile button -->
+			        <div class="pull-right">
+						<a class="button_temp" href="/confirm_download">Download Profile Information</a>
+			            <a class="button_temp" href="/edit_profile">Edit</a>
+
+			        </div>
+                    <div class="pull-left">
+						<a class="button_temp" href="/confirm_test_download">Download Test Information</a>
+			        </div>
+			    </div>
+			    
+
+			</div>
+					<div class="row">
+						<div class="12u">
+
+							<div id="copyright">
+								&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endblock %}
+		</div>
+
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/skel.min.js' %}"></script>
+			<script src="{% static 'js/skel-viewport.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'js/main.js' %}"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	</body>

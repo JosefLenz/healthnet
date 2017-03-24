@@ -1,0 +1,56 @@
+{% extends 'main/base_nav.html' %}
+{% load staticfiles %}
+{% load main_extras %}
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	{% block page-title %} Messaging {% endblock %}
+    <body>
+    {% block main %}
+    <div>
+        <div id="page-wrapper">
+            {% include 'main/navbar.html' %}
+        </div>
+            <div id="main">
+                <div class="container">
+				    <div class="row">
+			                {% load i18n static %}
+                            {% block extrahead %}{{ block.super }}
+                            {% if autocompleter_app.is_active %}{# using the available admin jQuery is enough #}
+                            {# should not be necessary since AS v1.3 with AJAX_SELECT_BOOTSTRAP set #}
+                            {#<script type="text/javascript" src="{% static 'admin/js/jquery.min.js' %}"></script>#}
+                  b          {% endif %}
+                            {{ form.media }}{# for ajax_selects (v1.3.6 at least) #}
+                            {% endblock %}
+                    </div>
+                    <div class="row">
+                        <div class="well">
+                            {% block content %}
+                            <div id="postman">
+                                <h1>{% block pm_write_title %}{% endblock %}</h1>
+                                <form action="{% if next_url %}?next={{ next_url|urlencode }}{% endif %}" method="post">{% csrf_token %}
+                                    <table>
+                                        {% block pm_write_recipient %}{% endblock %}
+                                        {{ form.as_table }}
+                                    </table>
+                                    <a class="button_temp" href="/messages/base" role="button">Back</a>
+                                    <input class="button_temp" type="submit" name="send" value="Send" />
+                                </form>
+
+
+                            </div>
+                            {% endblock %}
+                        </div>
+					    <div class="col-sm-4">
+					    	<!-- takin space -->
+					    </div>
+				    </div>
+                </div>
+            </div>
+    {% endblock %}
+    </body>
+</html>

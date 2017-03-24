@@ -1,0 +1,143 @@
+{% extends 'main/base_nav.html' %}
+{% load staticfiles %}
+{% load main_extras %}
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	{% block page-title %} Patient - {{view.patient.get_name}} {% endblock %}
+	<body>
+	{% block main %}
+
+		<div id="page-wrapper">
+			{% include 'main/navbar.html' %}
+			</div>
+			<div class="main">
+				<div class="row" style="margin:20px;"></div>
+				<div class="container">
+				    <div class="row">
+			            <!-- image display -->
+					    <div class="col-sm-2">
+                            <img class="img_prof" src="{{ MEDIA_URL }}{{ view.patient.avatar.url }}" alt="avatar"  style="margin-bottom:10px;border: solid #000 3px; border-radius: 5px; width: 100%; margin-top: auto"/>
+					    </div>
+					    <div class="col-sm-10">
+			                <!-- Displays patient name -->
+						    <h2 class="well">
+						    	View Patient Profile: {{ view.patient.get_name }}
+						    </h2>
+					    </div>
+				    </div>
+
+			        {% if form.errors %}
+			        <!-- Error messaging -->
+			            <div id="errors">
+			                <div class="inner" >
+			                    <p>There were some errors in the information you entered. Please correct the following:</p>
+			                    {{ form.non_field_errors }}
+			                    <ul>
+			                        {% for field in form %}
+			                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+			                        {% endfor %}
+			                    </ul>
+			                </div>
+			            </div>
+				    <!-- /Error messaging -->
+			        {% endif %}
+			        <form method="post"> <!-- start form -->
+			                {% csrf_token %}
+
+
+			            <div class="row">
+			                <!-- Headers for info wells -->
+			                <div class="col-sm-5">
+			                    <h3 class="well">Medical History</h3>
+			                </div>
+			                <div class="col-sm-2"></div>
+			                <div class="col-sm-5">
+			                    <h3 class="well">Personal Information</h3>
+			                </div>
+			            </div>
+			            <div class="row">
+
+			                <!-- Displays Patient medical information -->
+			                <div class="col-sm-5 well well-tall">
+			                    <p>
+			                        {{form.medical_conditions}}<br>
+			                        Admitted Hospital: {{ view.patient.admitted_hospital }}<br>
+			                        <h4>Prescriptions:</h4>
+			                        {% for prescription in view.prescriptions %}
+			                         <p>
+			                             <pre> {{ prescription }} </pre>
+			                             {% if view.isdoctor %}<a class="btn btn-danger pull-right" href="{% url 'main:deletePrescription' pk=prescription.pk%}" role="button">Delete</a>{% endif %}
+			                            <br><br>
+			                         </p>
+			                        {% endfor %}
+                                    <h4>Tests:</h4>
+			                        {% for test in view.tests %}
+			                         <p>
+			                             <pre>Name: {{ test.testName }}
+                                             {% if test.testImage.url != None and test.testImage.url != '/media/False' %}<br><img class="img_prof" src="{{ MEDIA_URL }}{{ test.testImage.url }}" alt="test_image"  style="margin-bottom:10px;border: solid #000 3px; border-radius: 5px; width: 100%; margin-top: auto"/> {% endif %}
+                                             <br>Comment: {{ test.testComment }}
+                                             <br>Doctor: {{ test.testDoctor }}
+                                         </pre>
+			                             {% if view.isdoctor %}<a class="btn btn-danger pull-right" href="{% url 'main:deleteTest' pk=test.pk%}" role="button">Delete</a>{% endif %}
+                                         {% if view.isdoctor %}{% if not test.testReleased %} <a class="btn btn-default pull-right" href="{% url 'main:releaseTest' pk=test.pk%}" role="button">Release</a> {% endif %}{% endif %}
+                                         {% if view.isdoctor %}<a class="btn btn-default pull-right" href="{% url 'main:editTest' pk=test.pk%}" role="button">Edit</a>{% endif %}
+			                            <br><br>
+			                         </p>
+			                        {% endfor %}
+			                    </p>
+			                </div>
+			                <div class="col-sm-2"></div>
+
+			                <!-- Displays Patient information -->
+			                <div class="col-sm-5 well well-tall">
+			                    <p>
+			                        Username: {{view.patient.user.username}}<br>
+			                        First Name: {{view.patient.user.first_name}}<br>
+			                        Last Name: {{view.patient.user.last_name}}<br>
+			                        Email: {{view.patient.user.email}}<br>
+			                        date of birth: {{view.patient.date_of_birth}}<br>
+                                    Address: <br>
+                                        {{view.patient.address_line1}}<br>
+                                        {{view.patient.address_line2}}<br>
+                                        {{view.patient.address_city}}<br>
+                                        {{view.patient.address_region}}<br>
+                                        {{view.patient.address_zip}}<br>
+                                        {{view.patient.address_country}}<br>
+			                        Preferred Hospital: {{view.patient.preferred_hospital}}<br>
+			                        Insurance Company: {{view.patient.insurance_company}}<br>
+			                        Insurance Number: {{view.patient.insurance_number}}<br>
+			                        Emergency Contact: {{view.patient.emergency_contact}}<br>
+			                        Emergency Contact Number: {{view.patient.emergency_contact_number}}<br>
+
+			                    </p>
+			                </div>
+			            </div>
+			            {% if view.isdoctor %}<input class="button_temp pull-right" type="submit" name="edit" value="Submit Edits" />{% endif %}
+			            {% if view.patient.admitted_hospital == None %}<a class="button_temp pull-right" href= "{% url 'main:admit' pk=view.patient.pk%}" role="button" style="margin-right: 5px;">Admit to Hospital</a>{% endif %}
+			            {% if view.isdoctor %}{% if view.patient.admitted_hospital != None %}<a class="button_temp pull-right" href= "{% url 'main:discharge' pk=view.patient.pk%}" role="button" style="margin-right: 5px;">Discharge from Hospital</a>{% endif %}{% endif %}
+			            {% if view.isdoctor or request.user.is_superuser%}{% if view.patient.admitted_hospital != None %}<a class="button_temp pull-right" href= "{% url 'main:transfer' pk=view.patient.pk%}" role="button" style="margin-right: 5px;">Transfer to Hospital</a>{% endif %}{% endif %}
+
+			            
+			            <a class="button_temp pull-left" href= "{% url 'main:patients' %}" role="button" style="margin-right: 5px;">Back</a>
+			            {% if view.isdoctor %}<a class="button_temp pull-left" href="{% url 'main:prescribe' pk=view.patient.pk%}">Add Prescription</a>{% endif %}
+			            {% if view.isdoctor %}<a class="button_temp pull-left" href="{% url 'main:test' pk=view.patient.pk%}">Add Test</a>{% endif %}
+			            
+			        </form>
+				    </div>
+			    </div>
+			</div>
+			<div class="row">
+				<div class="12u">
+					<div id="copyright">
+						&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+					</div>
+				</div>
+			</div>
+		{% endblock main %}
+	</body>
+</html>

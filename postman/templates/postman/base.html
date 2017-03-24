@@ -1,0 +1,45 @@
+{% extends 'main/base_nav.html' %}
+{% load staticfiles %}
+{% load main_extras %}
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+  {% block page-title %} Messaging {% endblock %}
+  <body>
+  {% block main %}
+  <div>
+      <div id="page-wrapper">
+        {% include 'main/navbar.html' %}
+        
+      </div>
+
+      {# not myself but a site-level one (TEMPLATE_DIRS setting) #}
+      {% load i18n static %}{% load postman_tags %}
+      {% block title %}<h2> Messaging </h2>{% endblock %}
+      {% block extrahead %}
+
+      {% endblock %}
+      {% block postman_menu %}
+      <div class="container">
+          <div class="well">
+              <ul id="postman_menu">{% postman_unread as unread_count %}
+                  <li><a class="button_temp" href="{% url 'postman:inbox' %}">&raquo;&nbsp;{% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a><br></li>
+                  <li><br></li>
+                  <li><a class="button_temp" href="{% url 'postman:write' %}">&raquo;&nbsp;{% trans "Write Message" %}</a></li>
+                  <li><br></li>
+                  <li><a class="button_temp" href="{% url 'postman:sent' %}">&raquo;&nbsp;{% trans "Sent Messages" %}</a></li>
+                  <li><br></li>
+                  <li><a class="button_temp" href="{% url 'postman:archives' %}">&raquo;&nbsp;{% trans "Archives" %}</a></li>
+                  <li><br></li>
+                  <li><a class="button_temp" href="{% url 'postman:trash' %}">&raquo;&nbsp;{% trans "Trash" %}</a></li>
+              </ul>
+          </div>
+      </div>
+      {% endblock %}
+
+  </div>
+  {% endblock %}
+  </body>

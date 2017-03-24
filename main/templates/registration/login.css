@@ -1,0 +1,28 @@
+body{
+	background-color: #1464f6
+}
+h1{
+	background-color: #fff;
+	padding: 15px;
+	padding-right: 25px;
+	display: inline-block;
+	font-family: "Helvetica";
+	font-weight: 200;
+	border-radius: 5px;
+	border: solid #000 3px;
+}
+.centerTable{
+	margin: 0px auto;
+	margin-top: 200px;
+}
+
+button{
+	width: 100px;
+	height: 40px;
+}
+
+.login{
+	height:40px;
+	width: 250px;
+}
+

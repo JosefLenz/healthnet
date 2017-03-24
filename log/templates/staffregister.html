@@ -1,0 +1,116 @@
+{% extends 'base_nav.html' %}
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	{% block page-title %} Register Staff {% endblock %}
+	{% block head %}
+		<link rel="stylesheet" href="{% static 'css/register_1.css' %}" >
+	{% endblock %}
+	<body>
+	{% block main %}
+		<div id="page-wrapper">
+			<div id="header-wrapper">
+				<div class="container_temp">
+					<div class="row_temp">
+						<div class="12u">
+							<header id="header">
+								<h1><a href="#" id="logo">Register Staff</a></h1>
+							</header>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main">
+			<div class="row" style="margin: 20px;"></div>
+			<form enctype="multipart/form-data" method="post">
+		        {% csrf_token %}
+		        {% if form.errors %}
+		        <!-- Error messaging -->
+		            <div id="errors">
+		                <div class="inner" >
+		                    <p>There were some errors in the information you entered. Please correct the following:</p>
+		                    {{ form.non_field_errors }}
+		                    <ul>
+		                        {% for field in form %}
+		                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+		                        {% endfor %}
+		                    </ul>
+		                </div>
+		            </div>
+			<!-- /Error messaging -->
+		        {% endif %}
+
+		        <div class="row">
+			        <div class="col-sm-2"></div>
+			        <div class="col-sm-3">
+			        <div class="well">
+			        	<div class="row">
+			        		{{ form.username }}
+			        	</div>
+                        <div class="row">
+			        		{{ form.email }}
+			        	</div>
+			        	<div class="row"></div>
+			        	<div class="row">
+			        		{{ form.password }}
+			        	</div>
+			        	<div class="row">
+			        		{{ form.password_confirm }}
+			        	</div>
+			        	<div class="row">
+			        		<h5>Name</h5>
+			        	</div>
+			        	<div class="row">
+			        		{{ form.first_name }}
+			        	</div>
+			        	<div class="row">
+			        		{{ form.last_name }}
+			        	</div>
+			        </div>
+			        </div>
+
+			        <div class="col-sm-1"></div>
+			        <div class="col-sm-3">
+			        <div class="well">
+			        	<div class="row">
+			        		{{ form.date_of_birth }}
+			        	</div>
+			        	<div class="row"></div>
+			        	<div class="row">
+			        		{{ form.hospital }}
+			        	</div>
+			        	<div class="row">
+			        		{{ form.type }}
+			        	</div>
+			        </div>
+			        </div>
+				</div>
+
+
+
+		        <div class="row" style="margin:10px;"></div>
+				<input class="button_temp pull-right" role="button" type="submit" value="Submit" /> <!-- submits form with information -->
+				<a class="button_temp pull-left" href="{% url 'main:adminc' %}" role= "button">Back</a> <!-- returns  -->
+		        </div>
+		    </form>
+			</div>
+			<div class="row">
+			<div class="row" style="margin:20px"></div>
+				<div class="12u">
+					<div id="copyright">
+								&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+					</div>
+				</div>
+			</div>
+
+
+	}
+
+	{% endblock %}
+	</body>
+</html>

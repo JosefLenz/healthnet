@@ -1,0 +1,18 @@
+
+.centerTable{
+	margin: 0px auto;
+	margin-top: 200px;
+}
+
+.register{
+	height:40px;
+	width: 90%;
+	margin:5px;
+}
+#register .col-sm-1{
+	width:5em;
+}
+
+.btn{
+	margin-right:5px;
+}

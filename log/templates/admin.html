@@ -1,0 +1,77 @@
+{% extends 'main/base_nav.html' %}
+{% load main_extras %}
+{% load staticfiles %}
+
+{% block page-title %} Admin {% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block main %}
+
+    {% include 'main/navbar.html' %}
+
+    <div class="row" style="margin:20px"></div>
+    <div class="row">
+        <!-- Headers for info wells -->
+        <div class="col-sm-5">
+            <h3 class="well">Recent Events</h3>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <h3 class="well">Stats</h3>
+        </div>
+    </div>
+    <div class="row">
+
+        <!-- Displays last 10 logs -->
+        <div class="col-sm-5 well well-tall">
+            {% for logc in latest_logs %}
+                <div style="padding-bottom: 7px">
+                    <li>{{ logc.date }} {{ logc.description }}</li>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-2"></div>
+
+        <!-- Displays Stats information -->
+        <div class="col-sm-5 well well-tall">
+            <p>
+                Daily Login Count: {{ daily_login }}<br>
+                Patients on HealthNet: {{ patient_count }}<br>
+                Doctors on HealthNet: {{ doctor_count }}<br>
+                Nurses on HealthNet: {{ nurse_count }}<br>
+                Most Prescribed Medication: {{ max_medication_name }}<br>
+                Hospital with Most Patients: {{ busiest_hospital }}<br>
+            </p>
+            <form method="POST" action="{% url 'main:adminc' %}">
+            {% csrf_token %}
+            <select name="ID">
+                {% for hospital in hospitals %}
+                    <option value="{{ hospital.ID }}">{{ hospital.hospitalName }}</option>
+                {% endfor %}
+            </select>
+            <input class="button_temp" role="button" type="submit" value="View Stats" />
+            </form>
+
+        </div>
+    </div>
+
+    <div class="pull-left">
+        <a class="button_temp" href="/admin">Full Admin</a>
+    </div>
+    <div class="pull-left">
+        <a class="button_temp" href="/staffregist">Create Nurse/Doctor</a>
+    </div>
+    <div class="row" style="margin:20px"></div>
+
+    <div class="row">
+        <div class="12u">
+
+            <div id="copyright">
+                &copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock main %}

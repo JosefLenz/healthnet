@@ -1,0 +1,32 @@
+/* body{
+    background-image: linear-gradient(180deg,#1464f6,#fff);
+    background-size: cover;
+    background-repeat:no-repeat;
+    height:100%;
+ }
+ */
+
+ .info{
+    width: 300px;
+    height: 600px;
+    margin: 0 auto;
+    margin-left: 55px;
+    background-color: #fff; 
+    display: inline-flex;
+    border: solid #000 3px;
+    border-radius: 5px;
+    padding: 5px;
+ }
+
+ .img_prof{
+    border: solid #000 3px;
+    border-radius: 5px;
+    width: 100%;
+ }
+
+ .well-tall{
+    height: 25em;
+    overflow-y: scroll;
+ }
+
+

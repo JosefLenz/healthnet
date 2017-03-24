@@ -1,0 +1,67 @@
+{% load staticfiles %}
+{% load main_extras %}
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>HealthNet - </title>
+		<link rel="shortcut icon" href="{% static 'main/images/bkz_io.png' %}"/>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+		<script src="https://use.fontawesome.com/d4ff336425.js"></script>
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" >
+		<link rel="stylesheet" href="{% static 'css/profile.css' %}" >
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<div id="header-wrapper">
+				<div class="container_temp">
+					<div class="row_temp">
+						<div class="12u">
+							<header id="header">
+								<h1><a href="#" id="logo">HealthNet</a></h1>
+							</header>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="row" style="margin:20px;"></div>
+				<form method="post">
+                    {% csrf_token %}
+				    <h3>Patient: {{ view.patient }}</h3>
+                        Admit to: {{ form.admitted_hospital }}<br>
+			        <a class="btn btn-default pull-left" href="{% url 'main:viewPatient' pk=view.patient.pk%}" role="button" style="margin-right: 5px;">Back</a>
+			        <input class="btn btn-danger pull-left" type="submit" name="edit" value="Admit"/>
+				</form>
+				<div class="row" style="margin:20px;"></div>
+			</div>
+			<div class="row">
+				<div class="12u">
+					<div id="copyright">
+						&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
